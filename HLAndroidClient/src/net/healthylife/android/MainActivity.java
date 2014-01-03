@@ -159,6 +159,7 @@ public class MainActivity extends Activity implements OnListener {
 
     /**
      * Override Activity lifecycle method.
+     * launch intro activity if it's supposed to
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

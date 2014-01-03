@@ -43,6 +43,9 @@ public class IntroductionActivity extends Activity implements OnIntroNavListener
     }
 
     @Override
+    /**
+     * the callback being invoked in third fragment
+     */
     public void done(boolean skipFutureIntro) {
         if (skipFutureIntro) {
             updateIntroPrefs();
