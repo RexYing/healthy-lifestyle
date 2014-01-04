@@ -29,5 +29,8 @@
     
     <!-- social function -->
     <string name="social">社交</string>
+    
+    <!-- history function -->
+    <string name="history">历史</string>
 
 </resources>

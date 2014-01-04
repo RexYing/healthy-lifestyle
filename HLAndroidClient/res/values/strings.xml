@@ -30,5 +30,8 @@
     
     <!-- social function -->
     <string name="social">Social</string>
+    
+    <!-- history function -->
+    <string name="history">History</string>
 
 </resources>

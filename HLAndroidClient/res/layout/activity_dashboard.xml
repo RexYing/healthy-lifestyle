@@ -12,7 +12,9 @@
         android:id="@+id/adviceFlipper"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:autoStart="true">
+        android:animateFirstView="false"
+        android:autoStart="true"
+        android:inAnimation="@anim/flyin" >
     
 	    <RelativeLayout
 	        android:layout_width="fill_parent"
@@ -73,24 +75,39 @@
 
         <Button
             android:id="@+id/recordBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_record"
             android:text="@string/record" />
 
         <Button
             android:id="@+id/statsBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_stats"
             android:text="@string/stats" />
         
         <Button
             android:id="@+id/socialBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_social"
             android:text="@string/social" />
+
+        <Button
+            android:id="@+id/historyBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_history"
+            android:text="@string/history" />
 
     </LinearLayout>
 
