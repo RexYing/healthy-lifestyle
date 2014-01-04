@@ -10,14 +10,16 @@
 
     <ViewFlipper
         android:id="@+id/adviceFlipper"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/advice_flipper_height"
         android:animateFirstView="false"
         android:autoStart="true"
-        android:inAnimation="@anim/flyin" >
+        android:flipInterval="@integer/advice_flip_interval"
+        android:inAnimation="@anim/flyin"
+        android:outAnimation="@anim/flyout" >
     
 	    <RelativeLayout
-	        android:layout_width="fill_parent"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content">
 
 	        <ImageView
@@ -31,7 +33,7 @@
 	    </RelativeLayout>
 	    
 	    <RelativeLayout
-	        android:layout_width="fill_parent"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content">
 
 	        <ImageView
@@ -48,8 +50,8 @@
 
     <LinearLayout
         android:id="@+id/stats"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true" 
         android:orientation="horizontal"
 	    android:layout_below="@id/adviceFlipper"
@@ -65,7 +67,7 @@
     
     <LinearLayout
         android:id="@+id/bottomMenu"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -76,37 +78,42 @@
         <Button
             android:id="@+id/recordBtn"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_record"
+            android:paddingTop="1dp"
             android:text="@string/record" />
 
         <Button
             android:id="@+id/statsBtn"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_stats"
+            android:paddingBottom="1dp"
             android:text="@string/stats" />
         
         <Button
             android:id="@+id/socialBtn"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_social"
+            android:paddingTop="2dp"
             android:text="@string/social" />
 
         <Button
             android:id="@+id/historyBtn"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_history"
+            android:gravity="center_horizontal"
+            android:paddingTop="5dp"
             android:text="@string/history" />
 
     </LinearLayout>
