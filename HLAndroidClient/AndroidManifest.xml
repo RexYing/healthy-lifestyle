@@ -32,10 +32,13 @@
             android:name="net.healthylife.android.MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name" >
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" /> 
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name="net.healthylife.android.IntroductionActivity"
@@ -51,7 +54,7 @@
  lines to choose a sample:
 
             android:name="com.google.cloud.backend.sample.guestbook.GuestbookActivity"
-            android:name="com.google.cloud.backend.sample.socialtalk.SocialTalkActivity"
+            android:name="com.google.cloud.backend.sample.socialtalk.SocialTalkActivity"
         -->
 
         <service android:name="com.google.cloud.backend.GCMIntentService" />
@@ -70,12 +73,22 @@
         <service android:name="com.google.cloud.backend.GCMIntentService" />
 
         <activity
-            android:name="com.google.cloud.backend.DashboardActivity"
+            android:name="net.healthylife.android.DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" /> 
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="net.healthylife.android.RecordNavActivity"
+            android:label="@string/title_activity_record_nav"
+            android:parentActivityName="net.healthylife.android.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.healthylife.android.DashboardActivity" />
         </activity>
     </application>
 

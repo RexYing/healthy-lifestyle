@@ -23,6 +23,15 @@
     
     <!-- record function -->
     <string name="record">记录</string>
+    <string name="title_activity_record_nav">记录生活点点滴滴</string>
+    <string name="msg_i_have_just">我刚刚……</string>
+    <string name="food">食物</string>
+    <string name="meals">正餐</string>
+    <string name="snacks">零食</string>
+    <string name="outdoor_exercise">户外</string>
+    <string name="indoor_exercise">室内</string>
+    <string name="sleep">睡眠</string>
+    <string name="nap">午睡</string>
     
     <!-- stats function -->
     <string name="stats">统计</string>
