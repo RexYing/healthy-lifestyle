@@ -1,12 +1,14 @@
-package net.healthylife.android;
+package net.healthylife.android.record;
 
-import com.google.cloud.backend.R;
-import com.google.cloud.backend.R.layout;
-import com.google.cloud.backend.R.menu;
+import net.healthylife.android.R;
+import net.healthylife.android.R.layout;
+import net.healthylife.android.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class RecordNavActivity extends Activity {
 
@@ -21,6 +23,11 @@ public class RecordNavActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.record_nav, menu);
 		return true;
+	}
+	
+	public void onOutdoorBtnClicked(View view) {
+		Intent exerciseIntent = new Intent(this, OutdoorExerciseListActivity.class);
+		startActivity(exerciseIntent);
 	}
 
 }

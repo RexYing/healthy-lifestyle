@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.cloud.backend"
+    package="net.healthylife.android"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -37,7 +37,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" /> 
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -54,7 +54,7 @@
  lines to choose a sample:
 
             android:name="com.google.cloud.backend.sample.guestbook.GuestbookActivity"
-            android:name="com.google.cloud.backend.sample.socialtalk.SocialTalkActivity"
+            android:name="com.google.cloud.backend.sample.socialtalk.SocialTalkActivity"
         -->
 
         <service android:name="com.google.cloud.backend.GCMIntentService" />
@@ -81,14 +81,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
-            android:name="net.healthylife.android.RecordNavActivity"
+            android:name="net.healthylife.android.record.RecordNavActivity"
             android:label="@string/title_activity_record_nav"
             android:parentActivityName="net.healthylife.android.DashboardActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.healthylife.android.DashboardActivity" />
+        </activity>
+        <activity
+            android:name="net.healthylife.android.record.OutdoorExerciseListActivity"
+            android:label="@string/title_outdoorexercise_list"
+            android:parentActivityName="net.healthylife.android.record.RecordNavActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.healthylife.android.record.RecordNavActivity" />
+        </activity>
+        <activity
+            android:name="net.healthylife.android.record.OutdoorExerciseDetailActivity"
+            android:label="@string/title_outdoorexercise_detail"
+            android:parentActivityName="net.healthylife.android.record.OutdoorExerciseListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OutdoorExerciseListActivity" />
         </activity>
     </application>
 

@@ -1,6 +1,6 @@
 package net.healthylife.android;
 
-import com.google.cloud.backend.R;
+import net.healthylife.android.R;
 
 import android.app.Activity;
 import android.app.Fragment;

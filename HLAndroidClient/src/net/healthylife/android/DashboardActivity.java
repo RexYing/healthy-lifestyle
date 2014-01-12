@@ -1,8 +1,10 @@
 package net.healthylife.android;
 
-import com.google.cloud.backend.R;
-import com.google.cloud.backend.R.layout;
-import com.google.cloud.backend.R.menu;
+import net.healthylife.android.record.RecordNavActivity;
+
+import net.healthylife.android.R;
+import net.healthylife.android.R.layout;
+import net.healthylife.android.R.menu;
 
 import android.os.Build;
 import android.os.Bundle;

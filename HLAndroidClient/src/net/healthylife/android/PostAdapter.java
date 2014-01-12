@@ -1,6 +1,6 @@
 package net.healthylife.android;
 
-import com.google.cloud.backend.R;
+import net.healthylife.android.R;
 import com.google.cloud.backend.core.CloudEntity;
 
 import android.content.Context;

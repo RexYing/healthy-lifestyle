@@ -43,6 +43,7 @@
 
     <!-- history function -->
     <string name="history">History</string>
-    
+    <string name="title_outdoorexercise_list">Outdoor Exercises</string>
+    <string name="title_outdoorexercise_detail">Outdoor Exercise Detail</string>
 
 </resources>
