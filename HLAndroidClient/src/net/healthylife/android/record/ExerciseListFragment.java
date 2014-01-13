@@ -1,24 +1,25 @@
 package net.healthylife.android.record;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import net.healthylife.android.record.exercise.type.DummyContent;
+import net.healthylife.android.R;
+import net.healthylife.android.record.exercise.ExerciseContent;
 
 /**
  * A list fragment representing a list of Outdoor Exercises. This fragment also
  * supports tablet devices by allowing list items to be given an 'activated'
  * state upon selection. This helps indicate which item is currently being
- * viewed in a {@link OutdoorExerciseDetailFragment}.
+ * viewed in a {@link ExerciseDetailFragment}.
  * <p>
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class OutdoorExerciseListFragment extends ListFragment {
+public class ExerciseListFragment extends ListFragment {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -63,17 +64,25 @@ public class OutdoorExerciseListFragment extends ListFragment {
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public OutdoorExerciseListFragment() {
+	public ExerciseListFragment() {
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		addExerciseItems();
 
 		// TODO: replace with a real list adapter.
-		setListAdapter(new ArrayAdapter<DummyContent.ExerciseItem>(getActivity(),
+		setListAdapter(new ArrayAdapter<ExerciseContent.ExerciseItem>(getActivity(),
 				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, DummyContent.ITEMS));
+				android.R.id.text1, ExerciseContent.ITEMS));
+	}
+	
+	private void addExerciseItems() {
+		Resources resources = getActivity().getResources();
+		ExerciseContent.addItem(ExerciseDetailFragment.FROM_MOVES_APP_ID, 
+				resources.getString(R.string.exercise_from_moves));
 	}
 
 	@Override
@@ -116,7 +125,7 @@ public class OutdoorExerciseListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		mCallbacks.onItemSelected(ExerciseContent.ITEMS.get(position).id);
 	}
 
 	@Override

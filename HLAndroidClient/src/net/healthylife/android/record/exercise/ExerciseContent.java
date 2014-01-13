@@ -1,4 +1,4 @@
-package net.healthylife.android.record.exercise.type;
+package net.healthylife.android.record.exercise;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
+public class ExerciseContent {
 
 	/**
 	 * An array of sample (dummy) items.
@@ -25,14 +25,21 @@ public class DummyContent {
 
 	static {
 		// Add 3 sample items.
-		addItem(new ExerciseItem("1", "Item 1"));
 		addItem(new ExerciseItem("2", "Item 2"));
 		addItem(new ExerciseItem("3", "Item 3"));
 	}
 
-	private static void addItem(ExerciseItem item) {
+	public static void addItem(ExerciseItem item) {
 		ITEMS.add(item);
 		ITEM_MAP.put(item.id, item);
+	}
+	
+	public static void addItem(String id, String content) {
+		if (ITEM_MAP.containsKey(id))
+			return;
+		ExerciseItem item = new ExerciseItem(id, content);
+		ITEMS.add(item);
+		ITEM_MAP.put(id, item);
 	}
 
 	/**

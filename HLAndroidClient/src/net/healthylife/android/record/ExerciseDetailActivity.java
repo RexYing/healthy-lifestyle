@@ -3,23 +3,27 @@ package net.healthylife.android.record;
 import net.healthylife.android.R;
 import net.healthylife.android.R.id;
 import net.healthylife.android.R.layout;
-
+import net.healthylife.android.record.exercise.MovesInteraction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * An activity representing a single Outdoor Exercise detail screen. This
  * activity is only used on handset devices. On tablet-size devices, item
  * details are presented side-by-side with a list of items in a
- * {@link OutdoorExerciseListActivity}.
+ * {@link ExerciseListActivity}.
  * <p>
  * This activity is mostly just a 'shell' activity containing nothing more than
- * a {@link OutdoorExerciseDetailFragment}.
+ * a {@link ExerciseDetailFragment}.
  */
-public class OutdoorExerciseDetailActivity extends FragmentActivity {
+public class ExerciseDetailActivity extends FragmentActivity {
+	
+	private MovesInteraction mMovesInteraction;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +47,10 @@ public class OutdoorExerciseDetailActivity extends FragmentActivity {
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
 			arguments.putString(
-					OutdoorExerciseDetailFragment.ARG_ITEM_ID,
+					ExerciseDetailFragment.ARG_ITEM_ID,
 					getIntent().getStringExtra(
-							OutdoorExerciseDetailFragment.ARG_ITEM_ID));
-			OutdoorExerciseDetailFragment fragment = new OutdoorExerciseDetailFragment();
+							ExerciseDetailFragment.ARG_ITEM_ID));
+			ExerciseDetailFragment fragment = new ExerciseDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.outdoorexercise_detail_container, fragment)
@@ -66,9 +70,43 @@ public class OutdoorExerciseDetailActivity extends FragmentActivity {
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
 			NavUtils.navigateUpTo(this, new Intent(this,
-					OutdoorExerciseListActivity.class));
+					ExerciseListActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+    /**
+     * Handle the result from Moves authorization flow. The result is delivered as an uri documented
+     * on the developer docs (see link below).
+     *
+     * @see https://dev.moves-app.com/docs/api
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case MovesInteraction.REQUEST_AUTHORIZE:
+            	// response URI
+                Uri resultUri = data.getData();
+                resultUri.getQueryParameter("code");
+                String msg;
+                if (resultCode == RESULT_OK) {
+                	msg = "Authorized successfully!";
+                }
+                else {
+					msg = "Failed to authorize: " + resultUri.getQueryParameter("error");
+				}
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+                break;
+            default:
+            	Toast.makeText(this, "Unrecognized response from Moves",
+            			Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    
+    public void setMovesInteraction(MovesInteraction moves) {
+    	mMovesInteraction = moves;
+    }
 }

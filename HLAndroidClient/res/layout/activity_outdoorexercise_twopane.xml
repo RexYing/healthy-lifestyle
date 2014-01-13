@@ -8,7 +8,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".OutdoorExerciseListActivity" >
+    tools:context=".ExerciseListActivity" >
 
     <!--
     This layout is a two-pane layout for the Outdoor Exercises
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/outdoorexercise_list"
-        android:name="net.healthylife.android.record.OutdoorExerciseListFragment"
+        android:name="net.healthylife.android.record.ExerciseListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

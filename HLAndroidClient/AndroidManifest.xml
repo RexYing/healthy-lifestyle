@@ -90,7 +90,7 @@
                 android:value="net.healthylife.android.DashboardActivity" />
         </activity>
         <activity
-            android:name="net.healthylife.android.record.OutdoorExerciseListActivity"
+            android:name="net.healthylife.android.record.ExerciseListActivity"
             android:label="@string/title_outdoorexercise_list"
             android:parentActivityName="net.healthylife.android.record.RecordNavActivity" >
             <meta-data
@@ -98,9 +98,9 @@
                 android:value="net.healthylife.android.record.RecordNavActivity" />
         </activity>
         <activity
-            android:name="net.healthylife.android.record.OutdoorExerciseDetailActivity"
+            android:name="net.healthylife.android.record.ExerciseDetailActivity"
             android:label="@string/title_outdoorexercise_detail"
-            android:parentActivityName="net.healthylife.android.record.OutdoorExerciseListActivity" >
+            android:parentActivityName="net.healthylife.android.record.ExerciseListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".OutdoorExerciseListActivity" />

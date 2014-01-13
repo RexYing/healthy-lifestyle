@@ -26,7 +26,7 @@ public class RecordNavActivity extends Activity {
 	}
 	
 	public void onOutdoorBtnClicked(View view) {
-		Intent exerciseIntent = new Intent(this, OutdoorExerciseListActivity.class);
+		Intent exerciseIntent = new Intent(this, ExerciseListActivity.class);
 		startActivity(exerciseIntent);
 	}
 

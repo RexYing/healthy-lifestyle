@@ -14,20 +14,20 @@ import android.view.MenuItem;
  * An activity representing a list of Outdoor Exercises. This activity has
  * different presentations for handset and tablet-size devices. On handsets, the
  * activity presents a list of items, which when touched, lead to a
- * {@link OutdoorExerciseDetailActivity} representing item details. On tablets,
+ * {@link ExerciseDetailActivity} representing item details. On tablets,
  * the activity presents the list of items and item details side-by-side using
  * two vertical panes.
  * <p>
  * The activity makes heavy use of fragments. The list of items is a
- * {@link OutdoorExerciseListFragment} and the item details (if present) is a
- * {@link OutdoorExerciseDetailFragment}.
+ * {@link ExerciseListFragment} and the item details (if present) is a
+ * {@link ExerciseDetailFragment}.
  * <p>
  * This activity also implements the required
- * {@link OutdoorExerciseListFragment.Callbacks} interface to listen for item
+ * {@link ExerciseListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class OutdoorExerciseListActivity extends FragmentActivity implements
-		OutdoorExerciseListFragment.Callbacks {
+public class ExerciseListActivity extends FragmentActivity implements
+		ExerciseListFragment.Callbacks {
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -51,7 +51,7 @@ public class OutdoorExerciseListActivity extends FragmentActivity implements
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			((OutdoorExerciseListFragment) getSupportFragmentManager()
+			((ExerciseListFragment) getSupportFragmentManager()
 					.findFragmentById(R.id.outdoorexercise_list))
 					.setActivateOnItemClick(true);
 		}
@@ -77,7 +77,7 @@ public class OutdoorExerciseListActivity extends FragmentActivity implements
 	}
 
 	/**
-	 * Callback method from {@link OutdoorExerciseListFragment.Callbacks}
+	 * Callback method from {@link ExerciseListFragment.Callbacks}
 	 * indicating that the item with the given ID was selected.
 	 */
 	@Override
@@ -87,8 +87,8 @@ public class OutdoorExerciseListActivity extends FragmentActivity implements
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(OutdoorExerciseDetailFragment.ARG_ITEM_ID, id);
-			OutdoorExerciseDetailFragment fragment = new OutdoorExerciseDetailFragment();
+			arguments.putString(ExerciseDetailFragment.ARG_ITEM_ID, id);
+			ExerciseDetailFragment fragment = new ExerciseDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.outdoorexercise_detail_container, fragment)
@@ -98,9 +98,9 @@ public class OutdoorExerciseListActivity extends FragmentActivity implements
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this,
-					OutdoorExerciseDetailActivity.class);
+					ExerciseDetailActivity.class);
 			detailIntent
-					.putExtra(OutdoorExerciseDetailFragment.ARG_ITEM_ID, id);
+					.putExtra(ExerciseDetailFragment.ARG_ITEM_ID, id);
 			startActivity(detailIntent);
 		}
 	}

@@ -32,6 +32,7 @@
     <string name="indoor_exercise">室内</string>
     <string name="sleep">睡眠</string>
     <string name="nap">午睡</string>
+    <string name="exercise_from_moves">走路/跑步/骑车</string>
     
     <!-- stats function -->
     <string name="stats">统计</string>
