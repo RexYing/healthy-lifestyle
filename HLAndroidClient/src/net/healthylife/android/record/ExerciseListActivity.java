@@ -3,11 +3,11 @@ package net.healthylife.android.record;
 import net.healthylife.android.R;
 import net.healthylife.android.R.id;
 import net.healthylife.android.R.layout;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
+//import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 /**
@@ -26,7 +26,7 @@ import android.view.MenuItem;
  * {@link ExerciseListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ExerciseListActivity extends FragmentActivity implements
+public class ExerciseListActivity extends Activity implements
 		ExerciseListFragment.Callbacks {
 
 	/**
@@ -51,9 +51,13 @@ public class ExerciseListActivity extends FragmentActivity implements
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			((ExerciseListFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.outdoorexercise_list))
-					.setActivateOnItemClick(true);
+			
+//			((ExerciseListFragment) getSupportFragmentManager()
+//                    .findFragmentById(R.id.outdoorexercise_list))
+//                    .setActivateOnItemClick(true);
+			ExerciseListFragment fragment = (ExerciseListFragment) getFragmentManager()
+					.findFragmentById(R.id.outdoorexercise_list);
+			fragment.setActivateOnItemClick(true);
 		}
 
 		// TODO: If exposing deep links into your app, handle intents here.
@@ -61,18 +65,7 @@ public class ExerciseListActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
+		//TODO: add options
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -90,7 +83,10 @@ public class ExerciseListActivity extends FragmentActivity implements
 			arguments.putString(ExerciseDetailFragment.ARG_ITEM_ID, id);
 			ExerciseDetailFragment fragment = new ExerciseDetailFragment();
 			fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
+//			getSupportFragmentManager().beginTransaction()
+//					.replace(R.id.outdoorexercise_detail_container, fragment)
+//					.commit();
+			getFragmentManager().beginTransaction()
 					.replace(R.id.outdoorexercise_detail_container, fragment)
 					.commit();
 

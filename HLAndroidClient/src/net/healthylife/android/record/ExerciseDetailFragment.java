@@ -1,11 +1,15 @@
 package net.healthylife.android.record;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import net.healthylife.android.R;
 import net.healthylife.android.R.id;
 import net.healthylife.android.R.layout;
@@ -75,7 +79,38 @@ public class ExerciseDetailFragment extends Fragment {
 	}
 	
 	private void oauthMoves() {
-		MovesInteraction movesInteraction = new MovesInteraction(getActivity());
-		movesInteraction.authInApp();
+		MovesInteraction movesInteraction = new MovesInteraction(this);
+		movesInteraction.authorizeInApp();
 	}
+	
+    /**
+     * Handle the result from Moves authorization flow. The result is delivered as an uri documented
+     * on the developer docs (see link below).
+     *
+     * @see https://dev.moves-app.com/docs/api
+     */
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    	super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case MovesInteraction.REQUEST_AUTHORIZE:
+            	// response URI
+                Uri resultUri = data.getData();
+                resultUri.getQueryParameter("code");
+                String msg;
+                if (resultCode == Activity.RESULT_OK) {
+                	msg = "Authorized successfully!";
+                }
+                else {
+					msg = "Failed to authorize: " + resultUri.getQueryParameter("error");
+				}
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+                break;
+            default:
+            	Toast.makeText(getActivity(), "Unrecognized response from Moves",
+            			Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }
