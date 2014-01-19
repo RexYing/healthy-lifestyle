@@ -39,6 +39,8 @@ public class ExerciseDetailFragment extends Fragment {
 	private MovesInteraction mMovesInteraction;
 	
 	private boolean mLoggedIn = false;
+	
+	private boolean mNeedResume = false;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -86,8 +88,13 @@ public class ExerciseDetailFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!mLoggedIn)
-			new VerifyToken().execute();
+		if (mNeedResume) {
+			if (!mLoggedIn)
+				new VerifyToken().execute();
+		}
+		else {
+			mNeedResume = true;
+		}
 	}
 	
 	private void oauthMoves() {	
