@@ -1,10 +1,16 @@
 package net.healthylife.android.record;
 
+import java.net.URLDecoder;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +41,10 @@ public class ExerciseDetailFragment extends Fragment {
 	 * The dummy content this fragment is presenting.
 	 */
 	private ExerciseContent.ExerciseItem mItem;
+	
+	private MovesInteraction mMovesInteraction;
+	
+	private boolean mLoggedIn = false;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -79,8 +89,8 @@ public class ExerciseDetailFragment extends Fragment {
 	}
 	
 	private void oauthMoves() {
-		MovesInteraction movesInteraction = new MovesInteraction(this);
-		movesInteraction.authorizeInApp();
+		mMovesInteraction = new MovesInteraction(this);
+		mMovesInteraction.authorizeInApp();
 	}
 	
     /**
@@ -101,6 +111,7 @@ public class ExerciseDetailFragment extends Fragment {
                 String msg;
                 if (resultCode == Activity.RESULT_OK) {
                 	msg = "Authorized successfully!";
+                	new ProcessToken(resultUri).execute();
                 }
                 else {
 					msg = "Failed to authorize: " + resultUri.getQueryParameter("error");
@@ -111,6 +122,30 @@ public class ExerciseDetailFragment extends Fragment {
             	Toast.makeText(getActivity(), "Unrecognized response from Moves",
             			Toast.LENGTH_SHORT).show();
         }
-
     }
+    
+	private class ProcessToken extends AsyncTask<Uri, Void, Void> {
+
+		Uri uri;
+
+		public ProcessToken(Uri uri) {
+			this.uri = uri;
+		}
+		
+		@Override
+		protected Void doInBackground(Uri...params) {
+			mMovesInteraction.obtainAccessToken(uri);
+  		    mLoggedIn = true;
+  		    return null;
+		}
+
+		/**
+		 * When we're done and we've retrieved either a valid token or an error from the server.
+		 * Can start retrieving data in stats
+		 */
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+		}
+	}
 }

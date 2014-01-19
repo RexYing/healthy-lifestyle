@@ -21,7 +21,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
-public class OAuth2Helper {
+public class Oauth2Helper {
 
 	/** Global instance of the HTTP transport. */
 	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
@@ -38,7 +38,7 @@ public class OAuth2Helper {
 	// default. Can be set by specific instances
 	private String mTag = "Oauth2";
 	
-	public OAuth2Helper(SharedPreferences sharedPreferences, Oauth2Params oauth2Params) {
+	public Oauth2Helper(SharedPreferences sharedPreferences, Oauth2Params oauth2Params) {
 		this.credentialStore = new SharedPreferencesCredentialStore(sharedPreferences);
 		this.oauth2Params = oauth2Params;
 		this.flow = new AuthorizationCodeFlow.Builder(oauth2Params.getAccessMethod() , 
@@ -53,7 +53,7 @@ public class OAuth2Helper {
 		
 //		try {
 //		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-//		        new InputStreamReader(OAuth2Helper.class.getResourceAsStream("/client_secrets.json")));
+//		        new InputStreamReader(Oauth2Helper.class.getResourceAsStream("/client_secrets.json")));
 //		
 //		 this.flow = new GoogleAuthorizationCodeFlow.Builder(
 //			        HTTP_TRANSPORT, JSON_FACTORY, clientSecrets,
@@ -114,5 +114,9 @@ public class OAuth2Helper {
 	
 	public void setTag(String tag) {
 		mTag = tag;
+	}
+	
+	public String getTag() {
+		return mTag;
 	}
 }

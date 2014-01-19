@@ -1,17 +1,25 @@
 package net.healthylife.android.record.exercise;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import net.healthylife.android.utils.Oauth2Helper;
 import net.healthylife.android.utils.Oauth2Params;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MovesInteraction {
 	
-	private static final String TAG = "Healthy Lifestyle";
+	public static final String TAG = "HealthyLife";
 
 	private static final String CLIENT_ID = "E9c55jZ6UHEHNZMaHPA7c16D7ga1Tc5n";
 	
@@ -33,15 +41,25 @@ public class MovesInteraction {
     private Activity mActivity;
     private Fragment mFragment;
     private Oauth2Params mParams;
+    private Oauth2Helper mOauth2Helper;
+    private SharedPreferences mStore;
     
 	public MovesInteraction(Fragment fragment) {
 		mFragment = fragment;
-		constructParams();
+		mActivity = fragment.getActivity();
+		init();
 	}
 	
 	public MovesInteraction(Activity activity) {
 		mActivity = activity;
+		init();
+	}
+	
+	private void init() {
 		constructParams();
+		mStore = PreferenceManager.getDefaultSharedPreferences(mActivity);
+		mOauth2Helper = new Oauth2Helper(mStore, mParams);
+		mOauth2Helper.setTag(TAG);
 	}
 	
 	private void constructParams() {
@@ -57,7 +75,10 @@ public class MovesInteraction {
 	}
     
 	/**
-	 * Need the Activity/Fragment that calls authInApp to define its method onActivityResult
+	 * This method authorizes through app instead of URL (which requires a webview)
+	 * Need the subclass of Activity/Fragment that calls authInApp to override the
+	 * method onActivityResult.
+	 * 
 	 */
     public void authorizeInApp() {
     	Uri uri = createAuthUri("moves", "app", "/authorize").build();
@@ -87,4 +108,33 @@ public class MovesInteraction {
                 .appendQueryParameter("state", String.valueOf(SystemClock.uptimeMillis()));
     }
     
+    /**
+     * Access token stored in a SharedPreferences that is passed to Oauth2Params.
+     * The key is USER_ID.
+     * @param uri callback auth URI that contains parameter "code"
+     */
+    public void obtainAccessToken(Uri uri) {
+		try {
+			String authCode = uri.getQueryParameter("code");
+			Log.i(TAG, "Found code = " + authCode);
+			mOauth2Helper.retrieveAndStoreAccessToken(authCode);
+		}
+		catch (NullPointerException e) {
+			
+		}
+		catch (IOException e) {
+			Log.e(TAG, "Cannot retrive access token", e);
+			e.printStackTrace();
+		}
+	}
+    
+    /**
+     * get today's date in yyyyMMdd format
+     * @return date in yyyyMMdd format
+     */
+    public String getTodayDate() {
+    	Date dt = new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    	return format.format(dt);
+    }
 }
