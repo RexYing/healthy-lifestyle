@@ -1,24 +1,18 @@
 package net.healthylife.android.record;
 
-import java.net.URLDecoder;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.healthylife.android.R;
-import net.healthylife.android.R.id;
-import net.healthylife.android.R.layout;
 import net.healthylife.android.record.exercise.ExerciseContent;
 import net.healthylife.android.record.exercise.MovesInteraction;
 
@@ -64,6 +58,7 @@ public class ExerciseDetailFragment extends Fragment {
 			mItem = ExerciseContent.ITEM_MAP.get(getArguments().getString(
 					ARG_ITEM_ID));
 		}
+		mMovesInteraction = new MovesInteraction(this);
 	}
 
 	@Override
@@ -75,7 +70,7 @@ public class ExerciseDetailFragment extends Fragment {
 			// get walking/running/cycling info from Moves App
 			rootView = inflater.inflate(R.layout.fragment_from_moves,
 					container, false);
-			oauthMoves();
+			new VerifyToken().execute();
 		} else {
 			rootView = inflater.inflate(
 					R.layout.fragment_outdoorexercise_detail, container, false);
@@ -88,8 +83,14 @@ public class ExerciseDetailFragment extends Fragment {
 		return rootView;
 	}
 	
-	private void oauthMoves() {
-		mMovesInteraction = new MovesInteraction(this);
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!mLoggedIn)
+			new VerifyToken().execute();
+	}
+	
+	private void oauthMoves() {	
 		mMovesInteraction.authorizeInApp();
 	}
 	
@@ -107,7 +108,6 @@ public class ExerciseDetailFragment extends Fragment {
             case MovesInteraction.REQUEST_AUTHORIZE:
             	// response URI
                 Uri resultUri = data.getData();
-                resultUri.getQueryParameter("code");
                 String msg;
                 if (resultCode == Activity.RESULT_OK) {
                 	msg = "Authorized successfully!";
@@ -122,6 +122,23 @@ public class ExerciseDetailFragment extends Fragment {
             	Toast.makeText(getActivity(), "Unrecognized response from Moves",
             			Toast.LENGTH_SHORT).show();
         }
+    }
+    
+    /**
+     * Check validity of access token. If there is one, no need to authorize
+     * If token is not valid, it will then call oauthMoves to start oauth2 process
+     */
+    private class VerifyToken extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			return mMovesInteraction.tokenIsValid();
+		}
+    	
+		protected void onPostExecute(Boolean isValid) {
+			if (!isValid)
+				oauthMoves();
+		}
     }
     
 	private class ProcessToken extends AsyncTask<Uri, Void, Void> {

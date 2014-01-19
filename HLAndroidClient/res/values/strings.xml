@@ -34,7 +34,6 @@
     <string name="indoor_exercise">Indoor</string>
     <string name="sleep">Sleep</string>
     <string name="nap">Nap</string>
-    
     <string name="title_outdoorexercise_list">Outdoor Exercises</string>
     <string name="title_outdoorexercise_detail">Outdoor Exercise Detail</string>
     <string name="exercise_from_moves">Walking/Running/Cycling</string>
@@ -47,5 +46,6 @@
 
     <!-- history function -->
     <string name="history">History</string>
+    <string name="title_activity_stats">StatsActivity</string>
 
 </resources>

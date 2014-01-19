@@ -69,6 +69,30 @@ public class Oauth2Helper {
 	}
 	
 	/**
+	 * If the access token is found, check validity by checking if its 
+	 * remaining lifetime is positive.
+	 * Does not guarantee that the token is really valid since the user can revoke access.
+	 * @return if the token is valid or not
+	 */
+	public boolean tokenIsValid() {
+		Credential credential = null;
+		try {
+			credential = flow.loadCredential(oauth2Params.getUserId());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if ((credential != null) && (credential.getExpirationTimeMilliseconds() > 0))
+			return true;
+		else {
+			Log.i(mTag, "Oauth2.0 access token does not exist or has expired");
+			return false;
+		}
+	}
+    
+	
+	/**
 	 * Use authorization code to get access token from oauth2params.getTokenServerUrl().
 	 * @param authorizationCode authorization code returned from authorization server/ mobile app
 	 * @throws IOException
@@ -85,7 +109,15 @@ public class Oauth2Helper {
 	
 	public String executeApiCall() throws IOException {
 		Log.i(mTag, "Executing API call at url " + this.oauth2Params.getApiUrl());
-		return HTTP_TRANSPORT.createRequestFactory(loadCredential()).buildGetRequest(new GenericUrl(this.oauth2Params.getApiUrl())).execute().parseAsString();
+		return HTTP_TRANSPORT.createRequestFactory(loadCredential()).buildGetRequest(
+				new GenericUrl(this.oauth2Params.getApiUrl())).execute().parseAsString();
+	}
+	
+	public String executeApiCallWithParameters(String params) throws IOException {
+		Log.i(mTag, "Executing API call with params " + params +
+				" at url " + this.oauth2Params.getApiUrl());
+		return HTTP_TRANSPORT.createRequestFactory(loadCredential()).buildGetRequest(
+				new GenericUrl(this.oauth2Params.getApiUrl() + params)).execute().parseAsString();
 	}
 //
 //	public String executeApiPostCall() throws IOException {

@@ -73,7 +73,7 @@ public class MovesInteraction {
 				API_URL
 				);
 	}
-    
+	
 	/**
 	 * This method authorizes through app instead of URL (which requires a webview)
 	 * Need the subclass of Activity/Fragment that calls authInApp to override the
@@ -81,6 +81,7 @@ public class MovesInteraction {
 	 * 
 	 */
     public void authorizeInApp() {
+    	
     	Uri uri = createAuthUri("moves", "app", "/authorize").build();
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         try {
@@ -123,7 +124,7 @@ public class MovesInteraction {
 			
 		}
 		catch (IOException e) {
-			Log.e(TAG, "Cannot retrive access token", e);
+			Log.e(TAG, "Cannot retrive access token " + uri.toString(), e);
 			e.printStackTrace();
 		}
 	}
@@ -136,5 +137,20 @@ public class MovesInteraction {
     	Date dt = new Date();
     	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
     	return format.format(dt);
+    }
+    
+    /**
+     * check if token is valid by and api call to get profile
+     * @return if access token is valid or not
+     */
+    public boolean tokenIsValid() {
+    	try {
+			mOauth2Helper.executeApiCallWithParameters("/user/profile");
+			Log.i(TAG, "Access token valid");
+		} catch (IOException e) {
+			Log.e(TAG, "Access token not valid");
+			return false;
+		}
+    	return true;
     }
 }
