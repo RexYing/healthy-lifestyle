@@ -36,6 +36,7 @@
     
     <!-- stats function -->
     <string name="stats">统计</string>
+    <string name="title_activity_stats">统计</string>
     
     <!-- social function -->
     <string name="social">社交</string>

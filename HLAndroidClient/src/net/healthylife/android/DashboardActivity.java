@@ -1,11 +1,10 @@
 package net.healthylife.android;
 
 import net.healthylife.android.record.RecordNavActivity;
-
+import net.healthylife.android.stats.StatsActivity;
 import net.healthylife.android.R;
 import net.healthylife.android.R.layout;
 import net.healthylife.android.R.menu;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
@@ -38,6 +37,11 @@ public class DashboardActivity extends Activity {
 	public void onRecordBtnClicked(View view) {
 		Intent recordIntent = new Intent(this, RecordNavActivity.class);
 		startActivity(recordIntent);
+	}
+	
+	public void onStatsBtnClicked(View view) {
+		Intent statsIntent = new Intent(this, StatsActivity.class);
+		startActivity(statsIntent);
 	}
 
 }

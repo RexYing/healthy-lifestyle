@@ -1,4 +1,4 @@
-package net.healthylife.android.record;
+package net.healthylife.android.record.exercise;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.healthylife.android.R;
-import net.healthylife.android.record.exercise.ExerciseContent;
-import net.healthylife.android.record.exercise.MovesInteraction;
 
 /**
  * A fragment representing a single Outdoor Exercise detail screen. This

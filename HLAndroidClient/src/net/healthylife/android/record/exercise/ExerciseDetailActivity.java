@@ -1,4 +1,4 @@
-package net.healthylife.android.record;
+package net.healthylife.android.record.exercise;
 
 import net.healthylife.android.R;
 import net.healthylife.android.R.id;

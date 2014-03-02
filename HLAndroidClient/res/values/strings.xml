@@ -40,6 +40,7 @@
 
     <!-- stats function -->
     <string name="stats">Stats</string>
+    <string name="title_activity_stats">Statatistics</string>
 
     <!-- social function -->
     <string name="social">Social</string>

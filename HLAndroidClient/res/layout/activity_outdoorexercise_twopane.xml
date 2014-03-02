@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/outdoorexercise_list"
-        android:name="net.healthylife.android.record.ExerciseListFragment"
+        android:name="net.healthylife.android.record.exercise.ExerciseListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

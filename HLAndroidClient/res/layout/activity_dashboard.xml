@@ -93,6 +93,7 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:drawableTop="@drawable/ic_stats"
+            android:onClick="onStatsBtnClicked"
             android:paddingBottom="1dp"
             android:text="@string/stats" />
         

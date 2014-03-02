@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="19" />
 
     <permission
         android:name="com.google.cloud.backend.permission.C2D_MESSAGE"
@@ -90,7 +90,7 @@
                 android:value="net.healthylife.android.DashboardActivity" />
         </activity>
         <activity
-            android:name="net.healthylife.android.record.ExerciseListActivity"
+            android:name="net.healthylife.android.record.exercise.ExerciseListActivity"
             android:label="@string/title_outdoorexercise_list"
             android:parentActivityName="net.healthylife.android.record.RecordNavActivity" >
             <meta-data
@@ -98,15 +98,16 @@
                 android:value="net.healthylife.android.record.RecordNavActivity" />
         </activity>
         <activity
-            android:name="net.healthylife.android.record.ExerciseDetailActivity"
+            android:name="net.healthylife.android.record.exercise.ExerciseDetailActivity"
             android:label="@string/title_outdoorexercise_detail"
-            android:parentActivityName="net.healthylife.android.record.ExerciseListActivity" >
+            android:parentActivityName="net.healthylife.android.record.exercise.ExerciseListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".OutdoorExerciseListActivity" />
         </activity>
+        
         <activity
-            android:name="net.healthylife.android.StatsActivity"
+            android:name="net.healthylife.android.stats.StatsActivity"
             android:label="@string/title_activity_stats"
             android:parentActivityName="net.healthylife.android.DashboardActivity" >
             <meta-data

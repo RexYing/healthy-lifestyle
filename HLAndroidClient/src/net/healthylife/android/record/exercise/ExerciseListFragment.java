@@ -1,4 +1,4 @@
-package net.healthylife.android.record;
+package net.healthylife.android.record.exercise;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.healthylife.android.R;
-import net.healthylife.android.record.exercise.ExerciseContent;
 
 /**
  * A list fragment representing a list of Outdoor Exercises. This fragment also

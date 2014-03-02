@@ -3,7 +3,7 @@ package net.healthylife.android.record;
 import net.healthylife.android.R;
 import net.healthylife.android.R.layout;
 import net.healthylife.android.R.menu;
-
+import net.healthylife.android.record.exercise.ExerciseListActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

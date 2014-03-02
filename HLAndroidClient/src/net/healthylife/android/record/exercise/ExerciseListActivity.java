@@ -1,8 +1,9 @@
-package net.healthylife.android.record;
+package net.healthylife.android.record.exercise;
 
 import net.healthylife.android.R;
 import net.healthylife.android.R.id;
 import net.healthylife.android.R.layout;
+import net.healthylife.android.record.exercise.ExerciseListFragment.Callbacks;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
